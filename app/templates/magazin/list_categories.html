@@ -1,0 +1,16 @@
+{% if cat_selected %}
+<li><a href="{% url 'shop' %}">Усі</a></li>
+{% else %}
+<li class="selected">Усі</li>
+{% endif %}
+
+{% for c in cats %}
+{% if c.product__count > 0 %}
+    {% if c.slug == cat_selected %}
+        <li class="selected">{{c}}({{c.product__count}})</li>
+    {% else %}
+        <li><a href="{{ c.get_absolute_url }}">{{c}}({{c.product__count}})</a></li>
+    {% endif %}
+{% endif %}
+{% endfor %}
+
